@@ -1,5 +1,24 @@
+import numpy as np
 from numpy import linalg
 import math
+import plotly.plotly as py
+import plotly.graph_objs as go
+
+N = 1000
+random_x = np.random.randn(N)
+random_y = np.random.randn(N)
+
+# Create a trace
+trace = go.Scatter(
+    x = random_x,
+    y = random_y,
+    mode = 'markers'
+)
+
+data = [trace]
+
+# Plot and embed in ipython notebook!
+py.iplot(data, filename='basic-scatter')
 
 '''
 Given data in the form data = [
@@ -25,7 +44,9 @@ def matrixMultiply(A, v):
 def degree1(data):
     # Fit y = b + mx to the data
 
-    A = [[1,data[0][0]]]
+    A = [
+            [1,data[0][0]]
+        ]
     for i in range(1,length):
         A.append([1,data[0][i]])
     # Calculate psuedoinverse by first getting Gram matrix (A^T)A
@@ -49,10 +70,25 @@ def degree1(data):
     return thetas
 
 def degree2(data):
-    # Fit y = ax^2 + bx + c to the data
+    # Fit y = thetas[0] + thetas[1]*x + thetas[2]*x^2 to the data
     A = 1
 
+def degreeN(data, n):
+    # Fit a degree n polynomial to the data y = thetas[0] + ... + thetas[n]*x^n
+    initial = [1, data[0][0]]
+    for i in range (2, n):
+        initial.append(math.pow(data[0][0],i))
+    A = [
+            initial
+        ]
+    for i in range(1, n):
+        set = [1, data[0][i]]
+        for j in range(2, n):
+            set.append(math.pow(data[0][i],j))
+        A.append(set)
+    # We have created a Vandermonde matrix here
+
 def determine(data):
+    # Check each of the polynomials, find the best
     degree = 1
     return degree
-    # Check each of the polynomials, find the best
