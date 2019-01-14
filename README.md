@@ -5,3 +5,10 @@ Fitting univariate equations.
 
 
 Must have numpy, plotly
+
+
+todo:
+have script take in data
+store it in database
+finish rms Prediction
+refine algo
