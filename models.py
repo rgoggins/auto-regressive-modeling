@@ -98,5 +98,5 @@ def predError(thetas, data):
 def determine(data):
     # Check each of the polynomials, find the best
     for i in range(1,12):
-
+        
     return degree
